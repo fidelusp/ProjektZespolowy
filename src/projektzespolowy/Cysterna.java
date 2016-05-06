@@ -15,6 +15,7 @@ public class Cysterna {
     
     private String nazwa_cysterny;
     private Komora[] komora;
+    //dupa
     
     public class Komora{
         private int pojemnosc;
