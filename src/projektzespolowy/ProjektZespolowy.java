@@ -5,6 +5,9 @@
  */
 package projektzespolowy;
 
+import javax.swing.*;
+
+
 /**
  *
  * @author PasterzM
@@ -14,8 +17,20 @@ public class ProjektZespolowy {
     /**
      * @param args the command line arguments
      */
+  
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+  
+        OknoZapotrzebowanie okno = new OknoZapotrzebowanie();
+        okno.setLocationRelativeTo(null);  
+        okno.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+       
+        okno.setVisible(true);
+       
+//        Okno okno=new Okno(); 
+//        okno.setLocationRelativeTo(null);  
+//        okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+//        okno.setVisible(true); 
     }
     
 }

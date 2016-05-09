@@ -46,38 +46,6 @@ public class OknoZapotrzebowanie extends JFrame implements ActionListener {
         }
         add(new JLabel("                                  "));
        }
-    
-        
-//        add(new JLabel("Stacja A:  "));
-//        for (int i = 0; i < 5; i++) {
-//            add(new JLabel("     "));
-//            add(new JTextField(3));
-//        }
-//        add(new JLabel("               "));
-//        
-//        
-//        add(new JLabel("Stacja A:  "));
-//        for (int i = 0; i < 5; i++) {
-//            add(new JLabel("     "));
-//            add(new JTextField(3));
-//        }
-//        add(new JLabel("               "));
-//        
-//        
-//        add(new JLabel("Stacja A:  "));
-//        for (int i = 0; i < 5; i++) {
-//            add(new JLabel("     "));
-//            add(new JTextField(3));
-//        }
-//        add(new JLabel("                "));
-//        
-//        
-//        add(new JLabel("Stacja A:  "));
-//        for (int i = 0; i < 5; i++) {
-//            add(new JLabel("     "));
-//            add(new JTextField(3));
-//        }
-//        add(new JLabel("               "));
         
         add(przyciskOK);
 
