@@ -40,7 +40,7 @@ public class OknoZapotrzebowanie extends JFrame implements ActionListener {
         
             int i;
 
-       for(i=0; i<30;i++){      // nie powinno być więcej niz 30 stacje
+       for(i=0; i<5;i++){      // nie powinno być więcej niz 30 stacje
            
                
             add(new JLabel("Stacja "+(i+1)+":")).setBounds(24, 40+i*30, 70, 50);
