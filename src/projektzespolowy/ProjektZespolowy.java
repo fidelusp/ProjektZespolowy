@@ -20,17 +20,19 @@ public class ProjektZespolowy {
   
     public static void main(String[] args) {
         
+        
+          OknoInicjalizujace okno = new OknoInicjalizujace();
+          okno.setLocationRelativeTo(null);  
+          okno.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+      
+          okno.setVisible(true);
+        
+        
+        
   
-        OknoZapotrzebowanie okno = new OknoZapotrzebowanie();
-        okno.setLocationRelativeTo(null);  
-        okno.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+ 
        
-        okno.setVisible(true);
        
-//        Okno okno=new Okno(); 
-//        okno.setLocationRelativeTo(null);  
-//        okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-//        okno.setVisible(true); 
     }
     
 }
