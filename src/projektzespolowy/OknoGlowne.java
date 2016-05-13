@@ -6,19 +6,25 @@
 package projektzespolowy;
 
 import java.awt.Dimension;
-import javax.swing.JFrame;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
 /**
  *
  * @author Paweł
  */
-public class OknoGlowne extends JFrame{
-    
-    
-    public OknoGlowne(){
-        
+public class OknoGlowne extends JFrame {
+
+    public OknoGlowne() {
+
         setTitle("Marszrutyzacja");
-        setSize(1000,600);
-    
+        setSize(1000, 600);
+
+        JPanel obrazPanel = new OknoGlownePanel();
+        add(obrazPanel);
+
     }
 
 }
