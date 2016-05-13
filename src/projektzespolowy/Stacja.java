@@ -10,7 +10,15 @@ package projektzespolowy;
  * @author PasterzM
  */
 public class Stacja {
-    private String nazwa;
-    private String[] paliwo;    //  5
-    private Zapotrzebowanie[] zapotrzebowanie;  //  5
+    
+     String nazwa;
+     int zap_pb95;
+     int zap_pb98;
+     int zap_on;
+     int zap_on_s;
+     int zap_on_eko;
+    
+     
+     
+     
 }

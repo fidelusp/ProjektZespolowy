@@ -17,22 +17,18 @@ public class ProjektZespolowy {
     /**
      * @param args the command line arguments
      */
-  
+   
     public static void main(String[] args) {
         
         
+        
           OknoInicjalizujace okno = new OknoInicjalizujace();
-          okno.setLocationRelativeTo(null);  
-          okno.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-      
-          okno.setVisible(true);
-        
-        
-        
-  
- 
-       
-       
+          
+        okno.setLocationRelativeTo(null);  
+        okno.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
+        okno.setVisible(true); 
+          
+    
     }
     
 }
