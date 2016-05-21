@@ -81,8 +81,9 @@ class ShortestPath{
     }
  
     // Driver method
+    /*
     public static void main (String[] args){
-        /* Let us create the example graph discussed above */
+        
        int graph[][] = new int[][]{{0, 4, 0, 0, 0, 0, 0, 8, 0},
                                   {4, 0, 8, 0, 0, 0, 0, 11, 0},
                                   {0, 8, 0, 7, 0, 4, 0, 0, 2},
@@ -95,6 +96,6 @@ class ShortestPath{
                                  };
         ShortestPath t = new ShortestPath();
         t.dijkstra(graph, 0);
-    }
+    }*/
 }
 //This code is contributed by Aakash Hasija

@@ -10,5 +10,21 @@ package projektzespolowy;
  */
 public class Wyniki {
     private int dlugosc_trasy;  //suma dlugosci wszystkich tras przez ktore ma pzrejechac cysterna
-    private String[] stacje;  //stacje przez ktore musi przejechac cysterna
+    private Stacja stacje;  //stacje przez ktore musi przejechac cysterna
+    /*
+    Wyniki(Cysterna cys)
+    {
+        this.dlugosc_trasy = cys.dlugosc_trasy;
+        for(int i=0;    i<cys.komora.length;    i++)
+        {
+            if(cys.komora[i].nazwa_paliwa.equals("PB95"))
+            {
+                stacje.setZap_pb95(cys.komora[i].);
+            }
+                    
+        this.stacje.zap_pb95 = cys.komora[]
+        }
+    }
+    */
+    
 }
