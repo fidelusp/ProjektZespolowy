@@ -6,21 +6,24 @@
 package projektzespolowy;
 
 import java.io.IOException;
+import java.util.Vector;
+import java.util.Iterator;
 
 /**
  *
  * @author Dawid
  */
 public class Test01 {
-
+/*
     public static void main(String[] args) throws IOException {
         String[] tab = new String[]{"PB95", "PB98", "ON", "ONs", "ONeko"};
         Stacja[] stacje;
         stacje = new Stacja[6];
+        Vector<Wyniki> wyniki = new Vector<Wyniki>();
 
         int tab2[][] = new int[][]{//zapotrzebowania
             {0, 0, 0, 0, 0},
-            {20, 13, 0, 6, 17},
+            {20, 13, 0, 20, 17},
             {4, 50, 20, 5, 0},
             {0, 3, 21, 9, 13},
             {16, 35, 29, 70, 12},
@@ -41,13 +44,13 @@ public class Test01 {
         }
 
         for (int i = 0; i < stacje.length; i++) {
-            stacje[i].set_nazwa((char) ('A' + i));
+            stacje[i].set_nazwa((char) ('A' + i-1));
             stacje[i].set_odleglosci(odleglosci[i]);
             stacje[i].setZap_pb95(tab2[i][0]);
             stacje[i].setZap_98(tab2[i][1]);
             stacje[i].setZap_on(tab2[i][2]);
-            stacje[i].setZap_on_eko(tab2[i][4]);
             stacje[i].setZap_on_s(tab2[i][3]);
+            stacje[i].setZap_on_eko(tab2[i][4]);
             stacje[i].sumuj_zapotrzebowanie();
         }
         /////////////////////////zapotrzebowanie dla stacji
@@ -62,7 +65,7 @@ public class Test01 {
                     + stacje[i].getZap_on_s() + "    " + stacje[i].getZap_on_eko());
             System.out.println("\n");
         }
-
+//ALGORYTM 1
         Cysterna cys = new Cysterna();
 
         for (int i = 1; i < stacje.length; i++) {
@@ -128,45 +131,129 @@ public class Test01 {
                 System.out.println("licznik :" + licznik);
             }
             suma = stacje[i].suma_zapotrzebowan;
-            if (licznik % cys.MAX_KOMOR == 0) {
+            if (licznik % cys.MAX_KOMOR == 0) { //przeliczanie ilosci komor na ilosc przejazdow
                 licznik = licznik / cys.MAX_KOMOR;
             } else {
                 licznik = (licznik / cys.MAX_KOMOR) + 1;
             }
-
-            for (int k = 0; k < licznik; k++) {
-                Stacja obj = new Stacja(stacje[i]);
+            
+            Stacja obj = new Stacja(stacje[i]);
+            for (int k = 0; k < licznik; k++) { 
+                //wyzerowanie cysterny
+                cys = new Cysterna();
                 for (int l = 0; l < cys.MAX_KOMOR; l++) {
-                    if (obj.getZap_on_s() % cys.MAX_POJEMNOSC_KOMOR != 0 && obj.getZap_on_s() > 10) //jesli w zapotrzebowaniu nie ma
-                    {//wielokrotnosci 
-                        obj.setZap_on_s(obj.getZap_on_s() - cys.MAX_POJEMNOSC_KOMOR);
-                        cys.komora[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
-                        cys.komora[l].nazwa_paliwa="ONs";
-                        cys.komora[l].nazwa_stacji=obj.getNazwa();
-                    } else// komory 0-9
-                    {
-                        cys.komora[l].pojemnosc = obj.getZap_on_s();
-                        obj.setZap_on_s(0);
-                        cys.komora[l].nazwa_paliwa="ONs";
-                        cys.komora[l].nazwa_stacji=obj.getNazwa();
+                    //pb95
+                    if (cys.komora[l].pojemnosc == 0) {
+                        if (obj.getZap_95() % cys.MAX_POJEMNOSC_KOMOR != 0 && obj.getZap_95() > 10) //jesli w zapotrzebowaniu nie ma
+                        {//wielokrotnosci 10
+                            obj.setZap_pb95(obj.getZap_95() - cys.MAX_POJEMNOSC_KOMOR);
+                            cys.komora[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
+                            cys.komora[l].nazwa_paliwa = "PB95";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        } else if (obj.getZap_95() % cys.MAX_POJEMNOSC_KOMOR == 0 && obj.getZap_95() != 0) {// komory 0-9
+                            obj.setZap_pb95(obj.getZap_95() - cys.MAX_POJEMNOSC_KOMOR);
+                            cys.komora[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
+                            cys.komora[l].nazwa_paliwa = "PB95";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        } else {
+                            cys.komora[l].pojemnosc = obj.getZap_95();
+                            obj.setZap_pb95(0);
+                            cys.komora[l].nazwa_paliwa = "PB95";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        }
+                    }
+                    //getZap_98
+                    if (cys.komora[l].pojemnosc == 0) {
+                        if (obj.getZap_98() % cys.MAX_POJEMNOSC_KOMOR != 0 && obj.getZap_98() > 10) //jesli w zapotrzebowaniu nie ma
+                        {//wielokrotnosci 10
+                            obj.setZap_98(obj.getZap_98() - cys.MAX_POJEMNOSC_KOMOR);
+                            cys.komora[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
+                            cys.komora[l].nazwa_paliwa = "PB98";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        } else if (obj.getZap_98() % cys.MAX_POJEMNOSC_KOMOR == 0 && obj.getZap_98() != 0) {// komory 0-9
+                            obj.setZap_98(obj.getZap_98() - cys.MAX_POJEMNOSC_KOMOR);
+                            cys.komora[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
+                            cys.komora[l].nazwa_paliwa = "PB98";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        } else {
+                            cys.komora[l].pojemnosc = obj.getZap_98();
+                            obj.setZap_98(0);
+                            cys.komora[l].nazwa_paliwa = "PB98";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        }
+                    }
+                    // on
+                    if (cys.komora[l].pojemnosc == 0) {
+                        if (obj.getZap_on() % cys.MAX_POJEMNOSC_KOMOR != 0 && obj.getZap_on() > 10) //jesli w zapotrzebowaniu nie ma
+                        {//wielokrotnosci 10
+                            obj.setZap_on(obj.getZap_on() - cys.MAX_POJEMNOSC_KOMOR);
+                            cys.komora[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
+                            cys.komora[l].nazwa_paliwa = "ON";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        } else if (obj.getZap_on() % cys.MAX_POJEMNOSC_KOMOR == 0 && obj.getZap_on() != 0) {// komory 0-9
+                            obj.setZap_on(obj.getZap_on() - cys.MAX_POJEMNOSC_KOMOR);
+                            cys.komora[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
+                            cys.komora[l].nazwa_paliwa = "ON";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        } else {
+                            cys.komora[l].pojemnosc = obj.getZap_on();
+                            obj.setZap_on(0);
+                            cys.komora[l].nazwa_paliwa = "ON";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        }
+                    }
+                    // on_eko
+                    if (cys.komora[l].pojemnosc == 0) {
+                        if (obj.getZap_on_eko() % cys.MAX_POJEMNOSC_KOMOR != 0 && obj.getZap_on_eko() > 10) //jesli w zapotrzebowaniu nie ma
+                        {//wielokrotnosci 10
+                            obj.setZap_on_eko(obj.getZap_on_eko() - cys.MAX_POJEMNOSC_KOMOR);
+                            cys.komora[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
+                            cys.komora[l].nazwa_paliwa = "ONeko";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        } else if (obj.getZap_on_eko() % cys.MAX_POJEMNOSC_KOMOR == 0 && obj.getZap_on_eko() != 0) {// komory 0-9
+                            obj.setZap_on_eko(obj.getZap_on_eko() - cys.MAX_POJEMNOSC_KOMOR);
+                            cys.komora[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
+                            cys.komora[l].nazwa_paliwa = "ONeko";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        } else {
+                            cys.komora[l].pojemnosc = obj.getZap_on_eko();
+                            obj.setZap_on_eko(0);
+                            cys.komora[l].nazwa_paliwa = "ONeko";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        }
+                    }
+                    //on_s
+                    if (cys.komora[l].pojemnosc == 0) {
+                        if (obj.getZap_on_s() % cys.MAX_POJEMNOSC_KOMOR != 0 && obj.getZap_on_s() > 10) //jesli w zapotrzebowaniu nie ma
+                        {//wielokrotnosci 10
+                            obj.setZap_on_s(obj.getZap_on_s() - cys.MAX_POJEMNOSC_KOMOR);
+                            cys.komora[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
+                            cys.komora[l].nazwa_paliwa = "ONs";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        } else if (obj.getZap_on_s() % cys.MAX_POJEMNOSC_KOMOR == 0 && obj.getZap_on_s() != 0) {// komory 0-9
+                            obj.setZap_on_s(obj.getZap_on_s() - cys.MAX_POJEMNOSC_KOMOR);
+                            cys.komora[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
+                            cys.komora[l].nazwa_paliwa = "ONs";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        } else {
+                            cys.komora[l].pojemnosc = obj.getZap_on_s();
+                            obj.setZap_on_s(0);
+                            cys.komora[l].nazwa_paliwa = "ONs";
+                            cys.komora[l].nazwa_stacji = obj.getNazwa();
+                        }
                     }
                 }
+               // System.out.println(cys.komora[0].pojemnosc + " " + cys.komora[1].pojemnosc + " " + cys.komora[2].pojemnosc + " " + cys.komora[3].pojemnosc + " " + cys.komora[4].pojemnosc);
+               ShortestPath t = new ShortestPath();
+               t.dijkstra(odleglosci,0);
+               cys.dlugosc_trasy = t.dist[i];
+                wyniki.add(new Wyniki(cys));
             }
-
+        }      
+        System.out.println("...");
+        for(int i=0; i<wyniki.size(); i++){
+            wyniki.get(i).wyswietl_wynik();
         }
-        /*
-    ////////////////////odleglosci
-    for(int i=0;    i<stacje.length;    i++)
-    {
-        for(int j=0;    j<stacje[i].odleglosci.length ; j++)
-        {
-        System.out.print(stacje[i].odleglosci[j]+" "); 
-        }
-        System.out.println();
-    }*/
-
-        //ShortestPath t = new ShortestPath();
-        //t.dijkstra(odleglosci, 0); 
     }
-
+*/
 }
