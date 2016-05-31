@@ -32,6 +32,18 @@ public class Stacja {
     this.zap_on_eko=kopia.zap_on_eko;
     this.suma_zapotrzebowan=kopia.suma_zapotrzebowan;
     }
+    public Stacja(){
+    nazwa = ' ';
+    paliwo = new String[0];    //  5
+    //private Zapotrzebowanie zapotrzebowanie;  //  5
+    odleglosci = new int[0];
+    zap_pb95 = 0;
+    zap_98 = 0;
+    zap_on = 0;
+    zap_on_s = 0;
+    zap_on_eko = 0;
+    suma_zapotrzebowan = 0;
+    }
     
     public void setZap_pb95(int zap_pb95) {
         this.zap_pb95 = zap_pb95;

@@ -5,10 +5,8 @@ import java.lang.*;
 import java.io.*;
  
 class ShortestPath{
-    // A utility function to find the vertex with minimum distance value,
-    // from the set of vertices not yet included in shortest path tree
     int V;
-    int dist[];
+    public int dist[];
     int minDistance(int dist[], Boolean sptSet[]){
         // Initialize min value
         int min = Integer.MAX_VALUE, min_index=-1;

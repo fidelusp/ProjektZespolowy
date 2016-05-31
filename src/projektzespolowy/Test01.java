@@ -19,7 +19,7 @@ public class Test01 {
         String[] tab = new String[]{"PB95", "PB98", "ON", "ONs", "ONeko"};
         Stacja[] stacje;
         stacje = new Stacja[6];
-        Vector<Wyniki> wyniki = new Vector<Wyniki>();
+        Vector<Wyniki> wyniki1 = new Vector<Wyniki>();
 
         int tab2[][] = new int[][]{//zapotrzebowania
             {0, 0, 0, 0, 0},
@@ -247,12 +247,12 @@ public class Test01 {
                ShortestPath t = new ShortestPath();
                t.dijkstra(odleglosci,0);
                cys.dlugosc_trasy = t.dist[i];
-                wyniki.add(new Wyniki(cys));
+                wyniki1.add(new Wyniki1(cys,1));
             }
         }      
         System.out.println("...");
         for(int i=0; i<wyniki.size(); i++){
-            wyniki.get(i).wyswietl_wynik();
+            wyniki1.get(i).wyswietl_wynik();
         }
     }
 */
