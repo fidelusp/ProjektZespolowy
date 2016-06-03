@@ -1,17 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projektzespolowy;
 
 import java.io.IOException;
 import java.util.Vector;
 
-/**
- *
- * @author PasterzM
- */
 public class Test02 {
 
     public static void main(String[] args) throws IOException {
@@ -132,20 +124,7 @@ public class Test02 {
         System.out.println("\n");
         for (int i = 0; i < wyniki2.size(); i++) {
             wyniki2.get(i).wyswietl_wynik(2);
-        }
-        /*
-         1.dla kazdej cysterny
-         2.dla kazdej stacji    
-         3.dla kazdej komory
-         if( stacja.zap != 0 )
-         komora = stacja;
-         stacja-komora;
-         */
-        /*
-for(int i=0;i<stacje.length;i++)
-    System.out.println(stacje[i].getZap_95()+ " " +stacje[i].getZap_98()+" "+stacje[i].getZap_on()+" "+stacje[i].getZap_on_eko()+" "+stacje[i].getZap_on_s());
-        */
-        
+        }        
         for (int i = 0; i < wyniki2.size(); i++) { //dla kazdej cysterny
             for (int j = 0; j < wyniki2.get(i).getCysterna().komora2.length; j++) { //dla kazdej komory
                 for (int k = 1; k < stacje.length; k++) { //dla kazdej stacji
@@ -314,69 +293,4 @@ for(int i=0;i<stacje.length;i++)
 
     }
 }
-
-/*
- for (int i = 1, it = 0; i < tab.length; i++, it++) {
- int suma_benzyny = 0;
-
- for (int j = 0; j < stacje.length; j++) {    //zliczanie zapotrzebowania na dana benzyne
- if (it == 0) {
- suma_benzyny += stacje[j].getZap_95();
- }
- if (it == 1) {
- suma_benzyny += stacje[j].getZap_98();
- }
- if (it == 2) {
- suma_benzyny += stacje[j].getZap_on();
- }
- if (it == 3) {
- suma_benzyny += stacje[j].getZap_on_eko();
- }
- if (it == 4) {
- suma_benzyny += stacje[j].getZap_on_s();
- }
- }
- //System.out.print(suma_benzyny+" ");
- int ilosc_przejazdow = 0;
- if (suma_benzyny % cys.MAX_KOMOR == 0) { //przeliczanie ilosci zapotrzebowania na ilosc przejazdow
- ilosc_przejazdow = suma_benzyny / (cys.MAX_KOMOR * cys.MAX_POJEMNOSC_KOMOR);
- } else {
- ilosc_przejazdow = (suma_benzyny / (cys.MAX_KOMOR * cys.MAX_POJEMNOSC_KOMOR)) + 1;
- }
- //System.out.println(ilosc_przejazdow);
-       
- Stacja obj = new Stacja(stacje[b]);
- for (int j = 0; j < ilosc_przejazdow; j++) {
- cys = new Cysterna();
- for (int l = 0, n = 0; l < cys.MAX_KOMOR; l++) {   //ladowanie cysterny
- if (cys.komora2[l].pojemnosc < cys.MAX_POJEMNOSC_KOMOR) {
- if (obj.getZap_95() % cys.MAX_POJEMNOSC_KOMOR != 0 && obj.getZap_95() >= 10) { //jesli w zapotrzebowaniu nie ma
- //wielokrotnosci 10
- obj.setZap_pb95(obj.getZap_95() - cys.MAX_POJEMNOSC_KOMOR);
- cys.komora2[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
- cys.komora2[l].nazwa_paliwa = "PB95";
- cys.komora2[l].nazwa_stacji[n] = obj.getNazwa();
- }else if (obj.getZap_95() % cys.MAX_POJEMNOSC_KOMOR == 0 && obj.getZap_95() != 0) {// komory 0-9
- obj.setZap_pb95(obj.getZap_95() - cys.MAX_POJEMNOSC_KOMOR);
- cys.komora2[l].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
- cys.komora2[l].nazwa_paliwa = "PB95";
- cys.komora2[l].nazwa_stacji[n] = obj.getNazwa();
- } else if(obj.getZap_95() != 0) {
- cys.komora2[l].pojemnosc = obj.getZap_95();
- obj.setZap_pb95(0);
- cys.komora2[l].nazwa_paliwa = "PB95";
- cys.komora2[l].nazwa_stacji[n] = obj.getNazwa();
- n++;
- }
- else if(obj.getZap_95()==0  && b<=stacje.length)
- {
- b++;   
- }
-                        
- }
- System.out.print(cys.komora2[l].pojemnosc+" ");
- }
- System.out.println("");
- }
- }
- */
+*/

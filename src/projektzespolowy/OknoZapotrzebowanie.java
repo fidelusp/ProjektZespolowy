@@ -24,8 +24,12 @@ public class OknoZapotrzebowanie extends JFrame implements ActionListener {
     JTextField on[] = new JTextField[50];
     JTextField onEko[] = new JTextField[50];
     JTextField onSuper[] = new JTextField[50];
-    Stacja stacja[]=new Stacja[100];
+    static Stacja stacja[]=new Stacja[30];
     OknoInicjalizujace x = new OknoInicjalizujace();
+    
+    static int[][] zapotrzebowania;
+
+    
     int[] zap_pb95 = new int[x.getIloscStacji()];
     int[] zap_pb98 = new int[x.getIloscStacji()];
     int[] zap_on = new int[x.getIloscStacji()];
@@ -51,7 +55,7 @@ public class OknoZapotrzebowanie extends JFrame implements ActionListener {
 
         for (i = 0; i < x.getIloscStacji(); i++) {      // nie powinno być więcej niz 30 stacje
 
-            add(new JLabel("Stacja " + ('A' + i) + ":")).setBounds(24, 40 + i * 30, 70, 50);
+            add(new JLabel("Stacja " + ((int)('A' + i)) + ":")).setBounds(24, 40 + i * 30, 70, 50);
             for (int l = 0; l < 5; l++) {
                 if (l == 0) {
                     add(pb95[i] = new JTextField(3)).setBounds(100 + l * 70 + l, 55 + i * 30, 40, 20);
@@ -77,6 +81,7 @@ public class OknoZapotrzebowanie extends JFrame implements ActionListener {
 
         add(przyciskOK).setBounds(200, 60 + 30 * i, 100, 40);
         przyciskOK.addActionListener(this);
+        //pack();
     }
 
     boolean testZapotrzebowanie() {
@@ -93,19 +98,20 @@ public class OknoZapotrzebowanie extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+     //inicjalzacja zapotrzebowania na kazda stacje
+        zapotrzebowania = new int[x.getIloscStacji()][5];
         for (int j = 0; j < x.getIloscStacji(); j++) {
-            zap_pb95[j] = Integer.parseInt(pb95[j].getText());
-            zap_pb98[j] = Integer.parseInt(pb98[j].getText());
-            zap_on[j] = Integer.parseInt(on[j].getText());
-            zap_on_eko[j] = Integer.parseInt(onEko[j].getText());
-            zap_on_super[j] = Integer.parseInt(onSuper[j].getText());
-            
+            zapotrzebowania[j][0] = Integer.parseInt(pb95[j].getText());
+            zapotrzebowania[j][1] = Integer.parseInt(pb98[j].getText());
+            zapotrzebowania[j][2] = Integer.parseInt(on[j].getText());
+            zapotrzebowania[j][3] = Integer.parseInt(onEko[j].getText());
+            zapotrzebowania[j][4] = Integer.parseInt(onSuper[j].getText());
         }
 
        if (testZapotrzebowanie()) {
                
             for(int k=0;k<x.getIloscStacji();k++){
-                stacja[k]=new Stacja(zap_pb95[k],zap_pb98[k],zap_on[k],zap_on_eko[k],zap_on_super[k]);
+                stacja[k]=new Stacja(zapotrzebowania[k][0],zapotrzebowania[k][1],zapotrzebowania[k][2],zapotrzebowania[k][3],zapotrzebowania[k][4]);
                
             }
             
@@ -121,4 +127,7 @@ public class OknoZapotrzebowanie extends JFrame implements ActionListener {
 
     }
 
+    public int[][] getZapotrzebowania() {
+        return zapotrzebowania;
+    }
 }

@@ -23,6 +23,7 @@ public class OknoInicjalizujace extends JFrame implements ActionListener {
         setTitle("Inicjalizacja");
         setSize(300, 125);
         setLayout(null);
+        setResizable(false);
         
         przyciskOK = new JButton("OK");
         wyjście = new JButton("Wyjście");

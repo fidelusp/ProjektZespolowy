@@ -14,13 +14,12 @@ import java.util.Iterator;
  * @author Dawid
  */
 public class Test01 {
-/*
-    public static void main(String[] args) throws IOException {
+    public static void test01(Vector<Wyniki> wyniki1,int[][] tab2 ){
         String[] tab = new String[]{"PB95", "PB98", "ON", "ONs", "ONeko"};
         Stacja[] stacje;
-        stacje = new Stacja[6];
-        Vector<Wyniki> wyniki1 = new Vector<Wyniki>();
-
+        stacje = new Stacja[5];
+        //Vector<Wyniki> wyniki1 = new Vector<Wyniki>();
+/*
         int tab2[][] = new int[][]{//zapotrzebowania
             {0, 0, 0, 0, 0},
             {20, 13, 0, 20, 17},
@@ -29,7 +28,7 @@ public class Test01 {
             {16, 35, 29, 70, 12},
             {32, 0, 2, 0, 12}
         };
-
+*/
         int odleglosci[][] = new int[][]{//miedzy stacjami
             {0, 3, 0, 0, 6, 12},
             {3, 0, 4, 0, 6, 0},
@@ -44,7 +43,7 @@ public class Test01 {
         }
 
         for (int i = 0; i < stacje.length; i++) {
-            stacje[i].set_nazwa((char) ('A' + i-1));
+            stacje[i].set_nazwa((char) ('A' + i));
             stacje[i].set_odleglosci(odleglosci[i]);
             stacje[i].setZap_pb95(tab2[i][0]);
             stacje[i].setZap_98(tab2[i][1]);
@@ -54,21 +53,21 @@ public class Test01 {
             stacje[i].sumuj_zapotrzebowanie();
         }
         /////////////////////////zapotrzebowanie dla stacji
-        for (int i = 1; i < stacje.length; i++) {
-            System.out.print(stacje[i].getNazwa() + " ");
-            for (int j = 0; j < stacje.length - 1; j++) {
-                System.out.print(stacje[i].getPaliwo(j) + " ");
-
-            }
-            System.out.println("\n");
-            System.out.print("  " + stacje[i].getZap_95() + "    " + stacje[i].getZap_98() + "    " + stacje[i].getZap_on() + "    "
-                    + stacje[i].getZap_on_s() + "    " + stacje[i].getZap_on_eko());
-            System.out.println("\n");
-        }
+//        for (int i = 1; i < stacje.length; i++) {
+//            System.out.print(stacje[i].getNazwa() + " ");
+//            for (int j = 0; j < stacje.length - 1; j++) {
+//                System.out.print(stacje[i].getPaliwo(j) + " ");
+//
+//            }
+//            System.out.println("\n");
+//            System.out.print("  " + stacje[i].getZap_95() + "    " + stacje[i].getZap_98() + "    " + stacje[i].getZap_on() + "    "
+//                    + stacje[i].getZap_on_s() + "    " + stacje[i].getZap_on_eko());
+//            ("\n");
+//        }
 //ALGORYTM 1
         Cysterna cys = new Cysterna();
 
-        for (int i = 1; i < stacje.length; i++) {
+        for (int i = 0; i < stacje.length; i++) {
             int licznik = 0;//ilosc komor przeznaczonych na daną benzynę
             int suma = stacje[i].suma_zapotrzebowan;//pomocnicza suma zapotrzebowan    
             while (suma > 0) {
@@ -128,7 +127,7 @@ public class Test01 {
 
                 }
 
-                System.out.println("licznik :" + licznik);
+                //("licznik :" + licznik);
             }
             suma = stacje[i].suma_zapotrzebowan;
             if (licznik % cys.MAX_KOMOR == 0) { //przeliczanie ilosci komor na ilosc przejazdow
@@ -243,17 +242,19 @@ public class Test01 {
                         }
                     }
                 }
-               // System.out.println(cys.komora[0].pojemnosc + " " + cys.komora[1].pojemnosc + " " + cys.komora[2].pojemnosc + " " + cys.komora[3].pojemnosc + " " + cys.komora[4].pojemnosc);
+               //System.out.println(cys.komora[0].pojemnosc + " " + cys.komora[1].pojemnosc + " " + cys.komora[2].pojemnosc + " " + cys.komora[3].pojemnosc + " " + cys.komora[4].pojemnosc);
                ShortestPath t = new ShortestPath();
                t.dijkstra(odleglosci,0);
-               cys.dlugosc_trasy = t.dist[i];
-                wyniki1.add(new Wyniki1(cys,1));
+               cys.dlugosc_trasy = t.dist[i];      
+               wyniki1.addElement(new Wyniki(cys,1));               
+              // wyniki1.lastElement().wyswietl_wynik(1);
             }
         }      
-        System.out.println("...");
-        for(int i=0; i<wyniki.size(); i++){
-            wyniki1.get(i).wyswietl_wynik();
+        //System.out.println("...");
+        /*
+        for(int i=0; i<wyniki1.size(); i++){
+            wyniki1.get(i).wyswietl_wynik(1);
         }
+        */
     }
-*/
 }

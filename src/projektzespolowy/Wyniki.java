@@ -5,6 +5,8 @@
  */
 package projektzespolowy;
 
+import projektzespolowy.Cysterna.Komora;
+
 /**
  *
  * @author PasterzM
@@ -25,26 +27,22 @@ public class Wyniki {
     Wyniki(Cysterna cys, int numer_testu) {
         switch (numer_testu) {
             case 1:
+                cysterna = new Cysterna(cys);
                 stacje = new Stacja();
                 stacje.set_nazwa(cys.komora[0].nazwa_stacji);
                 dlugosc_trasy = cys.dlugosc_trasy;
                 //this.dlugosc_trasy = cys.dlugosc_trasy;
+                
+                
                 for (int i = 0; i < cys.komora.length; i++) {
-                    if (cys.komora[i].nazwa_paliwa.equals("PB95")) {
-                        stacje.setZap_pb95(stacje.getZap_95() + cys.komora[i].pojemnosc);
-                    }
-                    if (cys.komora[i].nazwa_paliwa.equals("PB98")) {
-                        stacje.setZap_98(stacje.getZap_98() + cys.komora[i].pojemnosc);
-                    }
-                    if (cys.komora[i].nazwa_paliwa.equals("ON")) {
-                        stacje.setZap_on(stacje.getZap_on() + cys.komora[i].pojemnosc);
-                    }
-                    if (cys.komora[i].nazwa_paliwa.equals("ONs")) {
-                        stacje.setZap_on_s(stacje.getZap_on_s() + cys.komora[i].pojemnosc);
-                    }
+                        cysterna.komora[i].pojemnosc = cys.komora[i].pojemnosc;
+                        cysterna.komora[i].nazwa_stacji = cys.komora[i].nazwa_stacji;
+                        cysterna.komora[i].nazwa_paliwa = cys.komora[i].nazwa_paliwa;
+                    /*
                     if (cys.komora[i].nazwa_paliwa.equals("ONeko")) {
                         stacje.setZap_on_eko(stacje.getZap_on_eko() + cys.komora[i].pojemnosc);
                     }
+                            */
                 }
                 break;
             case 2:
@@ -57,7 +55,8 @@ public class Wyniki {
     public void wyswietl_wynik(int numer_testu) {
         switch (numer_testu) {
             case 1:
-                System.out.println(stacje.getNazwa() + " " + dlugosc_trasy + " " + stacje.getZap_95() + " " + stacje.getZap_98() + " " + stacje.getZap_on() + " " + stacje.getZap_on_eko() + " " + stacje.getZap_on_s());
+                 System.out.println(stacje.getNazwa() + " " + cysterna.komora[0].pojemnosc + " " + cysterna.komora[1].pojemnosc + " " + cysterna.komora[2].pojemnosc + " " + cysterna.komora[3].pojemnosc + " " + cysterna.komora[4].pojemnosc);
+                //System.out.println(stacje.getNazwa() + " " + dlugosc_trasy + " " + stacje.getZap_95() + " " + stacje.getZap_98() + " " + stacje.getZap_on() + " " + stacje.getZap_on_eko() + " " + stacje.getZap_on_s());
                 break;
             case 2:
                 //for (int i = 0; i < cysterna.komora2.length; i++) {

@@ -29,6 +29,12 @@ public class Cysterna {
 
     Cysterna(Cysterna cys) {
        //komora = new Komora(cys.komora);
+        for (int i = 0; i < komora.length; i++) {
+            komora[i] = new Komora();
+        }
+        for (int i = 0; i < komora.length; i++) {
+            komora2[i] = new Komora2();
+        }
        komora2 = cys.komora2;
        dlugosc_trasy = cys.dlugosc_trasy;
     }
