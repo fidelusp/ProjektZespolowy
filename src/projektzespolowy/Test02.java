@@ -1,4 +1,4 @@
-/*
+
 package projektzespolowy;
 
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.Vector;
 public class Test02 {
 
     public static void main(String[] args) throws IOException {
-        String[] tab = new String[]{"PB95", "PB98", "ON", "ONs", "ONeko"};
+        String[] tab = new String[]{"PB95", "PB98", "ON", "ONeko", "ONs"};
         Stacja[] stacje;
         stacje = new Stacja[7];
         Vector<Wyniki> wyniki2 = new Vector<Wyniki>();
@@ -124,11 +124,35 @@ public class Test02 {
         System.out.println("\n");
         for (int i = 0; i < wyniki2.size(); i++) {
             wyniki2.get(i).wyswietl_wynik(2);
-        }        
+        }
+        
+        for(int i=1; i<stacje.length; i++)
+            System.out.println(stacje[i].getNazwa()+ " "+stacje[i].getZap_95()+" "+ " "+stacje[i].getZap_98()+ " "+stacje[i].getZap_on()+ " "+stacje[i].getZap_on_s()+" "+stacje[i].getZap_on_eko());
+        
+        
+        
+        //wypisanie
         for (int i = 0; i < wyniki2.size(); i++) { //dla kazdej cysterny
+            System.out.println("cysterna z " + wyniki2.get(i).getCysterna().komora2[0].nazwa_paliwa + " :");
+            for (int j = 0; j < wyniki2.get(i).getCysterna().komora2.length; j++) {   //dla kazdej komory
+                System.out.print("komora " + (j + 1) + " z " + i + " cysterny ");
+                for (int l = 0; l < wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji.length && wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji[l] != ' '; l++) {
+                    System.out.print(wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji[l] + " ");
+                }
+                System.out.println("");
+            }
+
+        }
+
+    }
+}
+
+/*
+for (int i = 0; i < wyniki2.size(); i++) { //dla kazdej cysterny
             for (int j = 0; j < wyniki2.get(i).getCysterna().komora2.length; j++) { //dla kazdej komory
                 for (int k = 1; k < stacje.length; k++) { //dla kazdej stacji
-                    if (wyniki2.get(i).getCysterna().komora2[0].nazwa_paliwa.equals("PB95") && wyniki2.get(i).getCysterna().komora2[j].pojemnosc > 0) {  // jezeli cala cysterna dla pb95 i jezeli w komoze jest cokolwiek
+                    // jezeli cala cysterna dla pb95 i jezeli w komoze jest cokolwiek
+                    if (wyniki2.get(i).getCysterna().komora2[0].nazwa_paliwa.equals("PB95") && wyniki2.get(i).getCysterna().komora2[j].pojemnosc > 0) {
                         if ( stacje[k].getZap_95() >= 10 ) {
                                 stacje[k].setZap_pb95(stacje[k].getZap_95() - 10);
                                 int l = 0;
@@ -136,16 +160,15 @@ public class Test02 {
                                     l++;
                                 }
                                 wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji[l] = stacje[k].getNazwa();
-                                
                                 break;
-                            } else if (stacje[k].getZap_95() > 0) {
+                            } else if ( stacje[k].getZap_95() > 0 && stacje[k].getZap_95() < 10 ) {
                                 int l = k + 1;
                                 while ( l < stacje.length && stacje[l].getZap_95() == 0 ) {   //wyszukanie nastepnej stacji z zapotrzebowaniem
                                     l++;
                                 }
                                 if( l == stacje.length ) l--;
                                     System.out.println(l+" "+k);
-                                    stacje[l].setZap_pb95(stacje[l].getZap_95() - (stacje[k].getZap_95() - stacje[l].getZap_95()) );
+                                    stacje[l].setZap_pb95(stacje[l].getZap_95() - (10 - stacje[k].getZap_95()) );
                                     stacje[k].setZap_pb95(0);
 
                                 l = 0;
@@ -277,20 +300,4 @@ public class Test02 {
                 }
             }
         }
-        
-        //wypisanie
-        for (int i = 0; i < wyniki2.size(); i++) { //dla kazdej cysterny
-            System.out.println("cysterna z " + wyniki2.get(i).getCysterna().komora2[0].nazwa_paliwa + " :");
-            for (int j = 0; j < wyniki2.get(i).getCysterna().komora2.length; j++) {   //dla kazdej komory
-                System.out.print("komora " + (j + 1) + " z " + i + " cysterny ");
-                for (int l = 0; l < wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji.length && wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji[l] != ' '; l++) {
-                    System.out.print(wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji[l] + " ");
-                }
-                System.out.println("");
-            }
-
-        }
-
-    }
-}
 */

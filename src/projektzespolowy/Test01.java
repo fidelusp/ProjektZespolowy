@@ -17,7 +17,7 @@ public class Test01 {
     public static void test01(Vector<Wyniki> wyniki1,int[][] tab2 ){
         String[] tab = new String[]{"PB95", "PB98", "ON", "ONs", "ONeko"};
         Stacja[] stacje;
-        stacje = new Stacja[5];
+        stacje = new Stacja[OknoInicjalizujace.iloscStacji];
         //Vector<Wyniki> wyniki1 = new Vector<Wyniki>();
 /*
         int tab2[][] = new int[][]{//zapotrzebowania
@@ -29,22 +29,24 @@ public class Test01 {
             {32, 0, 2, 0, 12}
         };
 */
+        /*
         int odleglosci[][] = new int[][]{//miedzy stacjami
-            {0, 3, 0, 0, 6, 12},
+            {0, 3, 0, 0, 7, 12},
             {3, 0, 4, 0, 6, 0},
             {0, 4, 0, 0, 5, 7},
             {0, 0, 0, 0, 9, 8},
             {7, 6, 5, 9, 0, 0},
             {12, 0, 7, 8, 0, 0}
         };
-
+*/
         for (int i = 0; i < stacje.length; i++) {
-            stacje[i] = new Stacja(6);
+            stacje[i] = new Stacja(OknoInicjalizujace.iloscStacji);
         }
 
         for (int i = 0; i < stacje.length; i++) {
             stacje[i].set_nazwa((char) ('A' + i));
-            stacje[i].set_odleglosci(odleglosci[i]);
+            //stacje[i].set_odleglosci(odleglosci[i]);
+            stacje[i].set_odleglosci(OknoInicjalizujace.odleglosci[i]);
             stacje[i].setZap_pb95(tab2[i][0]);
             stacje[i].setZap_98(tab2[i][1]);
             stacje[i].setZap_on(tab2[i][2]);
@@ -242,10 +244,10 @@ public class Test01 {
                         }
                     }
                 }
-               //System.out.println(cys.komora[0].pojemnosc + " " + cys.komora[1].pojemnosc + " " + cys.komora[2].pojemnosc + " " + cys.komora[3].pojemnosc + " " + cys.komora[4].pojemnosc);
+               System.out.println(cys.komora[0].pojemnosc + " " + cys.komora[1].pojemnosc + " " + cys.komora[2].pojemnosc + " " + cys.komora[3].pojemnosc + " " + cys.komora[4].pojemnosc);
                ShortestPath t = new ShortestPath();
-               t.dijkstra(odleglosci,0);
-               cys.dlugosc_trasy = t.dist[i];      
+               t.dijkstra(OknoInicjalizujace.odleglosci,0);
+               cys.dlugosc_trasy = t.dist[i+1];      
                wyniki1.addElement(new Wyniki(cys,1));               
               // wyniki1.lastElement().wyswietl_wynik(1);
             }

@@ -8,6 +8,9 @@ package projektzespolowy;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 
@@ -17,6 +20,8 @@ public class OknoInicjalizujace extends JFrame implements ActionListener {
        JTextField cysterny, stacje;
        static int iloscCystern, iloscStacji;
     
+       public static int[][] odleglosci= null;
+       
     public OknoInicjalizujace(){
             
         
@@ -57,7 +62,14 @@ public class OknoInicjalizujace extends JFrame implements ActionListener {
                  
                  if(iloscCystern>0 && iloscStacji>0 && iloscStacji<31){
                      
+                     odleglosci = new int[iloscStacji+1][iloscStacji+1];
                      
+                     // ZAMIENIC W METODZIE WCZYTAJODLEGLOSCI SCIEZKE DOSTEPU DO PLIKU !!
+                     try {
+                         czytajplik.WczytajOdleglosci(odleglosci);
+                     } catch (FileNotFoundException ex) {
+                         System.out.println("Okno Inicjalizujace, Cos nie tak z odczytem odleglosci");
+                     }
                      
                      this.dispose();
            
