@@ -25,7 +25,7 @@ public class czytajplik {
 
         // OTWIERANIE PLIKU:
         try {
-            fr = new FileReader("C:\\Users\\PasterzM\\Desktop\\czytaj.txt");
+            fr = new FileReader("C:\\Users\\Dawid\\Documents\\NetBeansProjects\\ProjektZespolowy\\src\\projektzespolowy\\macierz.txt");
         } catch (FileNotFoundException e) {
             System.out.println("BŁĄD PRZY OTWIERANIU PLIKU!");
             System.exit(1);

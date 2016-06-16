@@ -1,4 +1,3 @@
-
 package projektzespolowy;
 
 import java.io.IOException;
@@ -11,6 +10,7 @@ public class Test02 {
         Stacja[] stacje;
         stacje = new Stacja[7];
         Vector<Wyniki> wyniki2 = new Vector<Wyniki>();
+        int[] sumaPaliw = new int[5];
 
         int tab2[][] = new int[][]{//zapotrzebowania
             {0, 0, 0, 0, 0},
@@ -23,7 +23,7 @@ public class Test02 {
         };
 
         int odleglosci[][] = new int[][]{//miedzy stacjami
-            {0, 3, 0, 0, 6, 12, 0},
+            {0, 3, 0, 0, 7, 12, 0},
             {3, 0, 4, 0, 6, 0, 0},
             {0, 4, 0, 0, 5, 7, 5},
             {0, 0, 0, 0, 9, 8, 0},
@@ -49,7 +49,7 @@ public class Test02 {
         /////////////////////////zapotrzebowanie dla stacji
         for (int i = 1; i < stacje.length; i++) {
             System.out.print(stacje[i].getNazwa() + " ");
-            for (int j = 0; j < tab.length ; j++) {
+            for (int j = 0; j < tab.length; j++) {
                 System.out.print(stacje[i].getPaliwo(j) + " ");
 
             }
@@ -78,6 +78,9 @@ public class Test02 {
                 if (it == 4) {
                     suma_benzyny += stacje[j].getZap_on_s();
                 }
+            }
+            if(it<5){
+                sumaPaliw[it] = suma_benzyny;
             }
             Cysterna cys = new Cysterna();
             int ilosc_przejazdow = 0;
@@ -125,27 +128,89 @@ public class Test02 {
         for (int i = 0; i < wyniki2.size(); i++) {
             wyniki2.get(i).wyswietl_wynik(2);
         }
+
+        for (int i = 1; i < stacje.length; i++) {
+            System.out.println(stacje[i].getNazwa() + " " + stacje[i].getZap_95() + " " + " " + stacje[i].getZap_98() + " " + stacje[i].getZap_on() + " " + stacje[i].getZap_on_s() + " " + stacje[i].getZap_on_eko());
+        }
+
         
-        for(int i=1; i<stacje.length; i++)
-            System.out.println(stacje[i].getNazwa()+ " "+stacje[i].getZap_95()+" "+ " "+stacje[i].getZap_98()+ " "+stacje[i].getZap_on()+ " "+stacje[i].getZap_on_s()+" "+stacje[i].getZap_on_eko());
-        
-        
+        int rodzajPaliwa = 0, licznik = 0,l;
+
+       // while (sumaPaliw[rodzajPaliwa] != licznik) {
+            for (int i =2,numerCysterny=0; i < stacje.length; i++,numerCysterny++) {   
+                i--;
+                for (int j = 0; j < wyniki2.get(numerCysterny).getCysterna().komora2.length; j++) {
+                    if (wyniki2.get(numerCysterny).getCysterna().komora2[0].nazwa_paliwa.equals("PB95") && stacje[i].getZap_95() >= 10) {
+                        stacje[i].setZap_pb95(stacje[i].getZap_95() - 10);
+                        licznik+=10;
+                        l = 0;
+                        while (l < wyniki2.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji.length && wyniki2.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji[l] != ' ') {
+                            l++;
+                        }
+                        wyniki2.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji[l] = stacje[i].getNazwa();  
+                        
+                       
+                    }else if(wyniki2.get(numerCysterny).getCysterna().komora2[0].nazwa_paliwa.equals("PB95") && stacje[i].getZap_95() < 10 && stacje[i].getZap_95() != 0){
+                        int stanKomory=stacje[i].getZap_95();
+                        stacje[i].setZap_pb95(0);
+                        l = 0;
+                        while (l < wyniki2.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji.length && wyniki2.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji[l] != ' ') {
+                            l++;
+                        }
+                        
+                        wyniki2.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji[l] = stacje[i].getNazwa();
+                        
+                        while(stanKomory!=wyniki2.get(numerCysterny).getCysterna().komora2[j].pojemnosc){
+                            i++;
+                            if(stacje[i].getZap_95()>(10-stanKomory)){
+                                stacje[i].setZap_pb95(stacje[i].getZap_95()-(10-stanKomory));
+                                stanKomory=10;
+                                l = 0;
+                                while (l < wyniki2.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji.length && wyniki2.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji[l] != ' ') {
+                                    l++;
+                                }
+                                wyniki2.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji[l] = stacje[i].getNazwa();
+                            }else if(stacje[i].getZap_95()!=0){         
+                                stanKomory+=stacje[i].getZap_95();
+                                stacje[i].setZap_pb95(0);
+                                l = 0;
+                                while (l < wyniki2.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji.length && wyniki2.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji[l] != ' ') {
+                                    l++;
+                                }
+                                wyniki2.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji[l] = stacje[i].getNazwa();
+                            }
+                        }
+                        
+                        
+                    } else{
+                        if(i<stacje.length-1)
+                        {
+                        i++;
+                        j--;
+                        }
+                        else break;
+                    }
+                }
+            }
+
+       // }
         
         //wypisanie
         for (int i = 0; i < wyniki2.size(); i++) { //dla kazdej cysterny
             System.out.println("cysterna z " + wyniki2.get(i).getCysterna().komora2[0].nazwa_paliwa + " :");
             for (int j = 0; j < wyniki2.get(i).getCysterna().komora2.length; j++) {   //dla kazdej komory
                 System.out.print("komora " + (j + 1) + " z " + i + " cysterny ");
-                for (int l = 0; l < wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji.length && wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji[l] != ' '; l++) {
-                    System.out.print(wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji[l] + " ");
+                for (int k = 0; k < wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji.length && wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji[k] != ' '; k++) {
+                    System.out.print(wyniki2.get(i).getCysterna().komora2[j].nazwa_stacji[k] + " ");
                 }
                 System.out.println("");
             }
-
+        
         }
-
     }
+
 }
+
 
 /*
 for (int i = 0; i < wyniki2.size(); i++) { //dla kazdej cysterny
@@ -300,4 +365,4 @@ for (int i = 0; i < wyniki2.size(); i++) { //dla kazdej cysterny
                 }
             }
         }
-*/
+ */
