@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
@@ -30,7 +31,7 @@ public class OknoGlowne extends JFrame {
     
     private JLabel napis_zapotrzebowanie = new JLabel("ZAPOTRZEBOWANIE");
     private JLabel napis_wyniki =new JLabel("WYNIKI");
-    public OknoGlowne() {
+    public OknoGlowne() throws IOException {
         super("Marszrutyzacja");
         setResizable(false);
         
@@ -75,9 +76,12 @@ public class OknoGlowne extends JFrame {
         }
         
         Vector<Wyniki> wyniki1 = new Vector<Wyniki>();
+   
+        
+       // Test02.test02(wyniki1,OknoZapotrzebowanie.zapotrzebowania);
         
         Test01.test01(wyniki1,OknoZapotrzebowanie.zapotrzebowania);
-
+        
         prawy.setLayout(new GridLayout(wyniki1.size()*2+1,13) );
 
         prawy.add( new JLabel( " Cysterna nr. ") );
