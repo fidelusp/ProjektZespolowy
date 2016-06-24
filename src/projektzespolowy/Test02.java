@@ -37,7 +37,6 @@ public class Test02 {
 
         for (int i = 0; i < stacje.length; i++) {
             stacje[i].set_nazwa((char) ('A' + i - 1));
-            // stacje[i].set_odleglosci(odleglosci[i]);
             stacje[i].setZap_pb95(tab2[i][0]);
             stacje[i].setZap_98(tab2[i][1]);
             stacje[i].setZap_on(tab2[i][2]);
@@ -47,6 +46,10 @@ public class Test02 {
         }
 
 //ALGORYTM 2
+
+        ///////////////////////////////////////////////
+        /////////// rozlanie paliwa w cys//////////////
+        ////////////////////////////////////////////
         for (int i = 1, it = 0; i < stacje.length; i++) {
             int suma_benzyny = 0;
 
@@ -76,7 +79,7 @@ public class Test02 {
                 ilosc_przejazdow = (suma_benzyny / (cys.MAX_KOMOR * cys.MAX_POJEMNOSC_KOMOR)) + 1;
             }
 
-            //System.out.println(ilosc_przejazdow);
+           
             while (suma_benzyny != 0) //rozdzielanie do cysterny
             {
                 for (int a = 0; a < ilosc_przejazdow; a++) {
@@ -101,7 +104,6 @@ public class Test02 {
 
                     }
                     wyniki1.add(new Wyniki(cys, 2));
-                    System.out.println();
                 }
 
             }
@@ -109,10 +111,10 @@ public class Test02 {
             Stacja obj = new Stacja(stacje[i]);
         }
 
-        System.out.println("\n");
-        for (int i = 0; i < wyniki1.size(); i++) {
-            wyniki1.get(i).wyswietl_wynik(2);
-        }
+      
+        ////////////////////////////////////////////
+        /////////// dodanie nazw stacji//////////////
+        ////////////////////////////////////////////
 
         int stanKomory, l, numerCysterny = 0;
         /// paliwo PB95
@@ -384,22 +386,13 @@ public class Test02 {
                 }
             }
         }
-
-        //wypisanie
-        for (int i = 0; i < wyniki1.size(); i++) { //dla kazdej cysterny
-            System.out.println("cysterna z " + wyniki1.get(i).getCysterna().komora2[0].nazwa_paliwa + " :");
-            for (int j = 0; j < wyniki1.get(i).getCysterna().komora2.length; j++) {   //dla kazdej komory
-                System.out.print("komora " + (j + 1) + " z " + i + " cysterny ");
-                for (int k = 0; k < wyniki1.get(i).getCysterna().komora2[j].nazwa_stacji.length && wyniki1.get(i).getCysterna().komora2[j].nazwa_stacji[k] != ' '; k++) {
-                    System.out.print(wyniki1.get(i).getCysterna().komora2[j].nazwa_stacji[k] + " ");
-                }
-                System.out.println("");
-            }
-
-        }
-
+        
+        ////////////////////////////////////////////
+        /////////// dodanie odleglosci//////////////
+        ////////////////////////////////////////////
+        
         for (int i = 0; i < wyniki1.size(); i++) { //dla każdego wyniku
-            //char[] nazwyStacji = new char[OknoInicjalizujace.iloscStacji];
+            
             char[] nazwyStacji = new char[5];
             for (int k : nazwyStacji) { // inicjalizacja tablicy pom spacjami
                 k = 'x';
@@ -429,52 +422,46 @@ public class Test02 {
                 }
             }
             System.out.println(nazwyStacji[0] + " " + nazwyStacji[1] + " " + nazwyStacji[2] + " " + nazwyStacji[3] + " " + nazwyStacji[4]);
-            //int[] odleglosci = new int[nazwyStacji.length];
+            
 
-            int od = 0;
-            int min = 0;
-            int das = 0;
+            int od = 0;     // od jakiej stacji teraz jedziemy
+            int min = 0;    // najmniejsza odleglosc
+            int nrIndeksu=0;    // nr indeksu usuwanej stacji z listy
 
             ShortestPath t = new ShortestPath();
             for (int z = 0; z < nazwyStacji.length; z++) {    //  dla kazdej cysterny
 
-                t.dijkstra(odleglosci, od);
-                //t.printSolution(t.dist, od);
+                t.dijkstra(odleglosci, od);    
                 min = 1000;
                 for (int v = 0; v < nazwyStacji.length; v++) {    //szukanie minimalnej odleglosci pomiedzy od a "nazwyStacji[0] - ('A' - 1)" 
-                    // System.out.println((int)nazwyStacji[0]);
+                    
 
-                    if(  nazwyStacji[v] ==' '){
+                    if(  nazwyStacji[v] ==' '){     // jak puste miejsce
                         continue;
                     }
                     
-                    if (nazwyStacji[v] ==' ' || v==nazwyStacji.length-1) {
+                    if (nazwyStacji[v] ==' ' || v==nazwyStacji.length-1) {   // jak dojdziemy do końca listy
                         if(min==1000) min=0;
                         wyniki1.get(i).getCysterna().dlugosc_trasy += min;
-                        od = das;
-                        nazwyStacji[das-1] = ' ';
+                        nazwyStacji[nrIndeksu] = ' ';
                         break;
                     } else if (min > t.dist[(int) (nazwyStacji[v] - ('A' - 1))] && t.dist[(int) (nazwyStacji[v] - ('A' - 1))]!=0) {
                         min = t.dist[(int) (nazwyStacji[v] - ('A' - 1))];
-                        das = (int) (nazwyStacji[v] - ('A' - 1));       // zle przeskakuje z np A B "w tym miejscu" D
+                        nrIndeksu=v;
+                        od = (int) (nazwyStacji[v] - ('A' - 1));       // zle przeskakuje z np A B "w tym miejscu" D
                     }
 
                 }
-                //wyniki1.get(i).getCysterna().dlugosc_trasy += min;
-               // od = das;
-               // nazwyStacji[das] = ' ';
+               
             }
             // "od" do "bazy"
-            t.dijkstra(tab2, od);
+            t.dijkstra(odleglosci, od);
             wyniki1.get(i).getCysterna().dlugosc_trasy += t.dist[0];
-            
-            System.out.println(wyniki1.get(i).getCysterna().dlugosc_trasy+'\n');
+            wyniki1.get(i).setDlugoscTrasy(wyniki1.get(i).getCysterna().dlugosc_trasy);
+            System.out.println(wyniki1.get(i).getCysterna().dlugosc_trasy);
                     }
     }
 
 }
 
-/*
-t.dijkstra(tab2, (int) nazwyStacji[v] - ('A' - 1) );
-                odleglosci[v] = t.dist[(int) nazwyStacji[v] - ('A' - 1)];
- */
+

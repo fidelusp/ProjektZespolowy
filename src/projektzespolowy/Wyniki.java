@@ -85,4 +85,8 @@ public class Wyniki {
     public Cysterna getCysterna() {
         return cysterna;
     }
+    
+    public void setDlugoscTrasy(int x) {
+        dlugosc_trasy=x;
+    }
 }

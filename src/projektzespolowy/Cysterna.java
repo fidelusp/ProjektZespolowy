@@ -14,7 +14,6 @@ public class Cysterna {
     public final int MAX_KOMOR = 5;
     public final int MAX_POJEMNOSC_KOMOR = 10;
     public int dlugosc_trasy;
-    //private String nazwa_cysterny;
     public Komora[] komora = new Komora[MAX_KOMOR];
     public Komora2[] komora2 = new Komora2[MAX_KOMOR];
 
@@ -28,7 +27,7 @@ public class Cysterna {
     }
 
     Cysterna(Cysterna cys) {
-       //komora = new Komora(cys.komora);
+      
         for (int i = 0; i < komora.length; i++) {
             komora[i] = new Komora();
         }
@@ -63,7 +62,6 @@ public class Cysterna {
         public Komora2() {
             this.pojemnosc = 0;
             this.nazwa_paliwa = new String("");
-            //this.nazwa_stacji= new char[OknoInicjalizujace.iloscStacji];
             this.nazwa_stacji = new char[6]; //dle testow potem zamienic
             for(int i=0; i<nazwa_stacji.length ;i++)
                 nazwa_stacji[i] = ' ';

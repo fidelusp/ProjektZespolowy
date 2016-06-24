@@ -81,10 +81,9 @@ public class OknoGlowne extends JFrame {
         
          //Test02.test02(wyniki2,OknoZapotrzebowanie.zapotrzebowania);
         
-        //Test01.test01(wyniki1,OknoZapotrzebowanie.zapotrzebowania);
+        Test01.test01(wyniki1,OknoZapotrzebowanie.zapotrzebowania);
         
         prawy.setLayout(new GridLayout(wyniki1.size()*2+1,13) );
-
         prawy.add( new JLabel( " Cysterna nr. ") );
         prawy.add( new JLabel( " Nazwa Stacji ") );
         prawy.add( new JLabel( " Trasa Cys. ") );
