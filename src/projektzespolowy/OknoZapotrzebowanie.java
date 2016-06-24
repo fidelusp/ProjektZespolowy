@@ -8,6 +8,9 @@ package projektzespolowy;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -103,15 +106,19 @@ public class OknoZapotrzebowanie extends JFrame implements ActionListener {
 
         if (testZapotrzebowanie()) {
 
-            for (int k = 0; k < x.getIloscStacji(); k++) {
-                stacja[k] = new Stacja(zapotrzebowania[k][0], zapotrzebowania[k][1], zapotrzebowania[k][2], zapotrzebowania[k][3], zapotrzebowania[k][4]);
-
+            try {
+                for (int k = 0; k < x.getIloscStacji(); k++) {
+                    stacja[k] = new Stacja(zapotrzebowania[k][0], zapotrzebowania[k][1], zapotrzebowania[k][2], zapotrzebowania[k][3], zapotrzebowania[k][4]);
+                    
+                }
+                this.dispose();
+                OknoGlowne okno = new OknoGlowne();
+                okno.setLocationRelativeTo(null);
+                okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                okno.setVisible(true);
+            } catch (IOException ex) {
+                Logger.getLogger(OknoZapotrzebowanie.class.getName()).log(Level.SEVERE, null, ex);
             }
-            this.dispose();
-            OknoGlowne okno = new OknoGlowne();
-            okno.setLocationRelativeTo(null);
-            okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            okno.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Popraw błędne dane!!", "Błędne dane", HEIGHT);
         }

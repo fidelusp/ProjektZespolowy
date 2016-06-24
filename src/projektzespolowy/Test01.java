@@ -247,7 +247,7 @@ public class Test01 {
                System.out.println(cys.komora[0].pojemnosc + " " + cys.komora[1].pojemnosc + " " + cys.komora[2].pojemnosc + " " + cys.komora[3].pojemnosc + " " + cys.komora[4].pojemnosc);
                ShortestPath t = new ShortestPath();
                t.dijkstra(OknoInicjalizujace.odleglosci,0);
-               cys.dlugosc_trasy = t.dist[i+1];      
+               cys.dlugosc_trasy = t.dist[i+1];
                wyniki1.addElement(new Wyniki(cys,1));               
               // wyniki1.lastElement().wyswietl_wynik(1);
             }

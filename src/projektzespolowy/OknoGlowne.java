@@ -76,11 +76,12 @@ public class OknoGlowne extends JFrame {
         }
         
         Vector<Wyniki> wyniki1 = new Vector<Wyniki>();
+        Vector<Wyniki> wyniki2 = new Vector<Wyniki>();
    
         
-       // Test02.test02(wyniki1,OknoZapotrzebowanie.zapotrzebowania);
+         //Test02.test02(wyniki2,OknoZapotrzebowanie.zapotrzebowania);
         
-        Test01.test01(wyniki1,OknoZapotrzebowanie.zapotrzebowania);
+        //Test01.test01(wyniki1,OknoZapotrzebowanie.zapotrzebowania);
         
         prawy.setLayout(new GridLayout(wyniki1.size()*2+1,13) );
 
