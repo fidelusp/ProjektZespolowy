@@ -77,18 +77,20 @@ public class OknoGlowne extends JFrame {
         
         Vector<Wyniki> wyniki1 = new Vector<Wyniki>();
         Vector<Wyniki> wyniki2 = new Vector<Wyniki>();
-   
         
-         //Test02.test02(wyniki2,OknoZapotrzebowanie.zapotrzebowania);
         
+        Test02.test02(wyniki2,OknoZapotrzebowanie.zapotrzebowania);
         Test01.test01(wyniki1,OknoZapotrzebowanie.zapotrzebowania);
+        //tu nalezy dokonać porównania
         
         prawy.setLayout(new GridLayout(wyniki1.size()*2+1,13) );
         prawy.add( new JLabel( " Cysterna nr. ") );
         prawy.add( new JLabel( " Nazwa Stacji ") );
         prawy.add( new JLabel( " Trasa Cys. ") );
 
+        //zamień na lepszy wynik test01 lub test02
         for(int i=0; i<10;i++) prawy.add( new JLabel() );
+        //if(true){//test01    
         
         for( int i=0; i<wyniki1.size() ;i++ ){
             //numer cysterny
@@ -110,7 +112,31 @@ public class OknoGlowne extends JFrame {
             prawy.add( new JLabel( Integer.toString(wyniki1.get(i).getCysterna().komora[4].pojemnosc)) );
             for(int j=0; j<13;j++) prawy.add( new JLabel() );
         }
-        
+        //}
+        /*
+        else{//test02
+            for( int i=0; i<wyniki2.size() ;i++ ){
+            //numer cysterny
+            prawy.add( new JLabel( Integer.toString((i%4)+1) ) );
+            //nazwa stacji
+            prawy.add( new JLabel(Character.toString(wyniki2.get(i).getCysterna().komora[0].nazwa_stacji) ) );
+//odleglosc
+            prawy.add(new JLabel( Integer.toString(wyniki2.get(i).getCysterna().dlugosc_trasy) ) );
+//zapotrzebowania
+            prawy.add( new JLabel( wyniki2.get(i).getCysterna().komora[0].nazwa_paliwa) );
+            prawy.add( new JLabel( Integer.toString(wyniki2.get(i).getCysterna().komora[0].pojemnosc)) );
+            prawy.add( new JLabel( wyniki2.get(i).getCysterna().komora[1].nazwa_paliwa) );
+            prawy.add( new JLabel( Integer.toString(wyniki2.get(i).getCysterna().komora[1].pojemnosc)) );
+            prawy.add( new JLabel( wyniki2.get(i).getCysterna().komora[2].nazwa_paliwa) );
+            prawy.add( new JLabel( Integer.toString(wyniki2.get(i).getCysterna().komora[2].pojemnosc)) );
+            prawy.add( new JLabel( wyniki2.get(i).getCysterna().komora[3].nazwa_paliwa) );
+            prawy.add( new JLabel( Integer.toString(wyniki2.get(i).getCysterna().komora[3].pojemnosc)) );
+            prawy.add( new JLabel( wyniki2.get(i).getCysterna().komora[4].nazwa_paliwa) );
+            prawy.add( new JLabel( Integer.toString(wyniki2.get(i).getCysterna().komora[4].pojemnosc)) );
+            for(int j=0; j<13;j++) prawy.add( new JLabel() );
+        }
+        }
+        */
         //JPanel obrazPanel = new OknoGlownePanel();
         //add(obrazPanel);
         pack();

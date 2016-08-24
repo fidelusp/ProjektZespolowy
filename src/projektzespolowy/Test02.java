@@ -4,32 +4,36 @@ import java.io.IOException;
 import java.util.Vector;
 
 public class Test02 {
+    static int koszttest02=0;
+    
+    public static void test02(Vector<Wyniki> wyniki1,int[][] tab2){ 
 
-    public static void main(String[] args/*test02(Vector<Wyniki> wyniki1, int[][] tab2) throws IOException */) {
+//    public static void main(String[] args/*test02(Vector<Wyniki> wyniki1, int[][] tab2) throws IOException */) {
         String[] tab = new String[]{"PB95", "PB98", "ON", "ONeko", "ONs"};
         Stacja[] stacje;
-        stacje = new Stacja[7];
-        Vector<Wyniki> wyniki1 = new Vector<Wyniki>();
+        stacje = new Stacja[OknoInicjalizujace.iloscStacji];
+       // Vector<Wyniki> wyniki1 = new Vector<Wyniki>();
 
-        int tab2[][] = new int[][]{//zapotrzebowania
-            {0, 0, 0, 0, 0},
-            {20, 13, 0, 20, 17},
-            {4, 50, 20, 5, 0},
-            {0, 3, 21, 9, 13},
-            {16, 35, 29, 70, 12},
-            {32, 0, 0, 0, 12},
-            {12, 0, 0, 10, 22}
-        };
-
-        int odleglosci[][] = new int[][]{//miedzy stacjami
-            {0, 3, 0, 0, 7, 12, 0},
-            {3, 0, 4, 0, 6, 0, 0},
-            {0, 4, 0, 0, 5, 7, 5},
-            {0, 0, 0, 0, 9, 8, 0},
-            {7, 6, 5, 9, 0, 0, 0},
-            {12, 0, 7, 8, 0, 0, 3},
-            {0, 0, 5, 0, 0, 3, 0}
-        };
+//        int tab2[][] = new int[][]{//zapotrzebowania
+//            {0, 0, 0, 0, 0},
+//            {20, 13, 0, 20, 17},
+//            {4, 50, 20, 5, 0},
+//            {0, 3, 21, 9, 13},
+//            {16, 35, 29, 70, 12},
+//            {32, 0, 0, 0, 12},
+//            {12, 0, 0, 10, 22}
+//        };
+        //ABCD->3+4+5+9+9+7=37
+        //DF ->7+6+5=18-------------7
+//        int odleglosci[][] = new int[][]{//miedzy stacjami
+//            {0, 3, 0, 0, 7, 12, 0},//BAZA
+//            {3, 0, 4, 0, 6, 0, 0},//A
+//            {0, 4, 0, 0, 5, 7, 5},//B
+//            {0, 0, 0, 0, 9, 8, 0},//C
+//            {7, 6, 5, 9, 0, 0, 0},//D
+//            {12, 0, 7, 8, 0, 0, 3},//E
+//            {0, 0, 5, 0, 0, 3, 0}//F
+//        };
 
         for (int i = 0; i < stacje.length; i++) {
             stacje[i] = new Stacja(OknoInicjalizujace.iloscStacji);
@@ -50,7 +54,12 @@ public class Test02 {
         ///////////////////////////////////////////////
         /////////// rozlanie paliwa w cys//////////////
         ////////////////////////////////////////////
-        for (int i = 1, it = 0; i < stacje.length; i++) {
+        
+        int xx;
+        if(stacje.length>=5) xx=stacje.length;
+        else xx=5;
+        
+        for (int i = 1, it = 0; i < xx; i++) {//tu jest blad zmien na x
             int suma_benzyny = 0;
 
             for (int j = 0; j < stacje.length; j++) {    //zliczanie zapotrzebowania na dana benzyne
@@ -73,18 +82,20 @@ public class Test02 {
 
             Cysterna cys = new Cysterna();
             int ilosc_przejazdow = 0;
-            if (suma_benzyny % cys.MAX_KOMOR == 0) { //przeliczanie ilosci zapotrzebowania na ilosc przejazdow
+
+            if ( (suma_benzyny %(cys.MAX_KOMOR * cys.MAX_POJEMNOSC_KOMOR)) == 0) { //przeliczanie ilosci zapotrzebowania na ilosc przejazdow
                 ilosc_przejazdow = suma_benzyny / (cys.MAX_KOMOR * cys.MAX_POJEMNOSC_KOMOR);
-            } else {
+            } else 
+            {
                 ilosc_przejazdow = (suma_benzyny / (cys.MAX_KOMOR * cys.MAX_POJEMNOSC_KOMOR)) + 1;
             }
-
-           
+                  
             while (suma_benzyny != 0) //rozdzielanie do cysterny
             {
                 for (int a = 0; a < ilosc_przejazdow; a++) {
                     cys = new Cysterna();
-                    for (int b = 0; b < cys.MAX_KOMOR; b++) {
+                    for (int b = 0; b < cys.MAX_KOMOR; b++) 
+                    {
                         if (suma_benzyny % cys.MAX_POJEMNOSC_KOMOR != 0 && suma_benzyny >= 10) { //19, 18 itd
                             suma_benzyny = suma_benzyny - cys.MAX_POJEMNOSC_KOMOR;
                             cys.komora2[b].pojemnosc = cys.MAX_POJEMNOSC_KOMOR;
@@ -108,7 +119,7 @@ public class Test02 {
 
             }
             it++;
-            Stacja obj = new Stacja(stacje[i]);
+            //Stacja obj = new Stacja(stacje[i]);
         }
 
       
@@ -143,7 +154,9 @@ public class Test02 {
                     wyniki1.get(numerCysterny).getCysterna().komora2[j].nazwa_stacji[l] = stacje[i].getNazwa();
 
                     while (stanKomory != wyniki1.get(numerCysterny).getCysterna().komora2[j].pojemnosc) {       //jezeli komora nie jest skonczona
+//                        if(i<stacje.length-1){
                         i++;
+//                        }
                         if (stacje[i].getZap_95() > (10 - stanKomory)) {          // gdy dana stacja ma wieksze zapotrzebowanie niz wolnego miejsca w komorze
                             stacje[i].setZap_pb95(stacje[i].getZap_95() - (10 - stanKomory));
                             stanKomory = 10;
@@ -431,7 +444,7 @@ public class Test02 {
             ShortestPath t = new ShortestPath();
             for (int z = 0; z < nazwyStacji.length; z++) {    //  dla kazdej cysterny
 
-                t.dijkstra(odleglosci, od);    
+                t.dijkstra(OknoInicjalizujace.odleglosci, od);    
                 min = 1000;
                 for (int v = 0; v < nazwyStacji.length; v++) {    //szukanie minimalnej odleglosci pomiedzy od a "nazwyStacji[0] - ('A' - 1)" 
                     
@@ -455,12 +468,16 @@ public class Test02 {
                
             }
             // "od" do "bazy"
-            t.dijkstra(odleglosci, od);
+            t.dijkstra(OknoInicjalizujace.odleglosci, od);
             wyniki1.get(i).getCysterna().dlugosc_trasy += t.dist[0];
             wyniki1.get(i).setDlugoscTrasy(wyniki1.get(i).getCysterna().dlugosc_trasy);
             System.out.println(wyniki1.get(i).getCysterna().dlugosc_trasy);
-                    }
+            koszttest02+=wyniki1.get(i).getCysterna().dlugosc_trasy;
+     
+        }
+        System.out.println("wynik "+koszttest02);
     }
+    
 
 }
 
